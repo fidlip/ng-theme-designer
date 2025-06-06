@@ -1,0 +1,23 @@
+@if (newFieldset) {
+  <p-fieldset class="w-full" [legend]="newFieldset ? header : ''" [toggleable]="true">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </p-fieldset>
+} @else {
+  <h5>{{ header }}</h5>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+}
+
+<ng-template #content>
+  <div class="flex flex-column flex-wrap gap-1">
+    @for (entry of sectionConfig | keyvalue:null; track entry.key) {
+      <png-section-content [header]="entry.key" [sectionConfig]="entry.value" [key]="key">
+        @if (entry.value | isJson) {
+          <png-next-level-section [sectionConfig]="entry.value" [header]="entry.key|titlecase" [key]="entry.key"
+                                  [newFieldset]="false">
+          </png-next-level-section>
+        }
+      </png-section-content>
+    }
+  </div>
+
+</ng-template>

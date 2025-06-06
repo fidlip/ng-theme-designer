@@ -1,0 +1,36 @@
+{
+  "name": "png-theme-designer",
+  "version": "1.0.0",
+  "description": "Standalone Theme Designer for PrimeNG",
+  "main": "./src/public-api.ts",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fidlip/png-theme-designer.git"
+  },
+  "keywords": [
+    "Theme",
+    "Designer",
+    "PrimeNG"
+  ],
+  "author": "fidlip",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fidlip/png-theme-designer/issues"
+  },
+  "homepage": "https://github.com/fidlip/png-theme-designer#readme",
+  "peerDependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

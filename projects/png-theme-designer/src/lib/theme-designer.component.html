@@ -1,0 +1,59 @@
+<div class="openCloseButton">
+  <button type="button" class="icon-btn" (click)="drawerVisible=!drawerVisible">
+    <i class="pi"
+       [class.pi-chevron-left]="!drawerVisible"
+       [class.pi-chevron-right]="drawerVisible"></i>
+  </button>
+</div>
+<p-drawer styleClass="md:!w-80 lg:!w-[42rem]"
+          [(visible)]="drawerVisible"
+          [baseZIndex]="1000"
+          [modal]="false"
+          [position]="'right'"
+>
+  <ng-template #header>
+    <div class="grow flex items-center justify-between p-5">
+      <div class="">
+        <span class="font-bold text-xl">{{ title }}</span>
+      </div>
+      <div class="ae-designer-action-buttons flex items-center gap-2">
+        <p-button icon="pi pi-download" [rounded]="true" [text]="true" severity="secondary" pTooltip="Stáhnout"
+                  (click)="onDownloadTheme()"/>
+        <p-button icon="pi pi-upload" [rounded]="true" [text]="true" severity="secondary" pTooltip="Aplikovat"
+                  (click)="onApplyTheme()"/>
+        <p-button icon="pi pi-sun" [rounded]="true" [text]="true" severity="secondary" pTooltip="Přepnout na tmavý mód"
+                  (click)="toggleDarkMode()" tooltipPosition="left"/>
+      </div>
+    </div>
+  </ng-template>
+  <div class="ae-designer-content flex-auto overflow-auto overflow-x-hidden pb-5 px-5">
+    @if (theme && !loading) {
+      <p-tabs value="primitive">
+        <p-tablist>
+          @for (themeTabPanelSection of themeSections; track themeTabPanelSection.key) {
+            <p-tab [value]="themeTabPanelSection.key">
+              {{ themeTabPanelSection.key | titlecase }}
+            </p-tab>
+          }
+        </p-tablist>
+        <p-tabpanels>
+          @for (themeTabPanelSection of themeSections; track themeTabPanelSection.key) {
+            @if (themeTabPanelSection.key) {
+              <p-tabpanel [value]="themeTabPanelSection.key">
+                @if (themeTabPanelSection.value | isJson) {
+                  <png-tab-section [sectionConfig]="themeTabPanelSection.value" [key]="themeTabPanelSection.key"></png-tab-section>
+                }
+              </p-tabpanel>
+            }
+          }
+
+        </p-tabpanels>
+      </p-tabs>
+
+    } @else {
+      <p-progress-spinner class="ngp-loader"/>
+    }
+
+  </div>
+
+</p-drawer>

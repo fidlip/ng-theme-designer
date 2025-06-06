@@ -1,0 +1,15 @@
+<p-fieldset class="w-full mb-3" [legend]="header" [toggleable]="true">
+  <div class="flex flex-row flex-wrap gap-1">
+    @for (entry of sectionConfig | keyvalue:null; track entry.key) {
+      @let fullEntryKey = key + '.' + entry.key;
+      <png-section-content [header]="entry.key" [sectionConfig]="entry.value" [key]="fullEntryKey">
+        @if (entry.value | isJson) {
+          <png-next-level-section [sectionConfig]="entry.value" [header]="entry.key|titlecase" [key]="fullEntryKey">
+          </png-next-level-section>
+        }
+
+      </png-section-content>
+
+    }
+  </div>
+</p-fieldset>
